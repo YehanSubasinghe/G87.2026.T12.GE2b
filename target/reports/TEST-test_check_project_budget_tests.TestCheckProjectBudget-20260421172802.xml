@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="test_check_project_budget_tests.TestCheckProjectBudget-20260421172802" tests="7" file="test_check_project_budget_tests.py" time="0.017" timestamp="2026-04-21T17:28:02" failures="0" errors="0" skipped="0">
+	<testcase classname="test_check_project_budget_tests.TestCheckProjectBudget" name="test_tc_m3_01_invalid_project_id" time="0.002" timestamp="2026-04-21T17:28:02"/>
+	<testcase classname="test_check_project_budget_tests.TestCheckProjectBudget" name="test_tc_m3_02_flows_file_not_found" time="0.002" timestamp="2026-04-21T17:28:02"/>
+	<testcase classname="test_check_project_budget_tests.TestCheckProjectBudget" name="test_tc_m3_03_empty_flows" time="0.002" timestamp="2026-04-21T17:28:02"/>
+	<testcase classname="test_check_project_budget_tests.TestCheckProjectBudget" name="test_tc_m3_04_no_matching_pid" time="0.002" timestamp="2026-04-21T17:28:02"/>
+	<testcase classname="test_check_project_budget_tests.TestCheckProjectBudget" name="test_tc_m3_05_single_inflow" time="0.003" timestamp="2026-04-21T17:28:02"/>
+	<testcase classname="test_check_project_budget_tests.TestCheckProjectBudget" name="test_tc_m3_06_single_outflow" time="0.003" timestamp="2026-04-21T17:28:02"/>
+	<testcase classname="test_check_project_budget_tests.TestCheckProjectBudget" name="test_tc_m3_07_multiple_flows" time="0.003" timestamp="2026-04-21T17:28:02"/>
+</testsuite>

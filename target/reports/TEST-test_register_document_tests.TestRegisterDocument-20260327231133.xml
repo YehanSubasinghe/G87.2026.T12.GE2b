@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="test_register_document_tests.TestRegisterDocument-20260327231133" tests="27" file="test_register_document_tests.py" time="0.034" timestamp="2026-03-27T23:11:33" failures="0" errors="0" skipped="0">
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_01_valid_pdf" time="0.002" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_02_valid_docx" time="0.002" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_03_valid_xlsx" time="0.002" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_04_file_not_found" time="0.000" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_05_file_not_json" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_06_empty_object" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_07_missing_project_id_pair" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_08_missing_filename_pair" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_09_empty_pid_value" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_10_empty_filename_value" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_11_missing_opening_brace" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_12_missing_closing_brace" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_13_missing_comma" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_14_missing_colon_pid" time="0.002" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_15_missing_colon_filename" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_16_duplicate_opening_brace" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_17_duplicate_comma" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_18_wrong_key_project_id" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_19_wrong_key_filename" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_20_pid_too_short" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_21_pid_too_long" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_22_pid_non_hex" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_23_name_too_short" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_24_name_too_long" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_25_name_special_char" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_26_missing_extension" time="0.001" timestamp="2026-03-27T23:11:33"/>
+	<testcase classname="test_register_document_tests.TestRegisterDocument" name="test_tc_m2_27_invalid_extension" time="0.001" timestamp="2026-03-27T23:11:33"/>
+</testsuite>
