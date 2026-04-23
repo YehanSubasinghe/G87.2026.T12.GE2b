@@ -1,0 +1,34 @@
+
+Running tests...
+----------------------------------------------------------------------
+F
+======================================================================
+FAIL [0.008s]: test_tc_m2_st_01_input_file_not_found (test_register_project_tests.TestRegisterDocument.test_tc_m2_st_01_input_file_not_found)
+P1: input file does not exist on disk.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Python313\Lib\unittest\case.py", line 58, in testPartExecutor
+    yield
+  File "C:\Python313\Lib\unittest\case.py", line 651, in run
+    self._callTestMethod(testMethod)
+    
+  File "C:\Python313\Lib\unittest\case.py", line 606, in _callTestMethod
+    if method() is not None:
+    ^^^^^^^^^^^^^^^
+  File "c:\users\ryan kh\pycharmprojects\g87.2026.t12.ge2b\src\unittest\python\test_register_project_tests.py", line 39, in test_tc_m2_st_01_input_file_not_found
+    with self.assertRaises(EnterpriseManagementException) as ctx:
+    ^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\unittest\case.py", line 263, in __exit__
+    self._raiseFailure("{} not raised".format(exc_name))
+    ^^^^^^^
+  File "C:\Python313\Lib\unittest\case.py", line 200, in _raiseFailure
+    raise self.test_case.failureException(msg)
+    ^^^^^^^^^^^^^^^
+AssertionError: EnterpriseManagementException not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.021s
+
+FAILED (failures=1)
+
+Generating XML reports...
