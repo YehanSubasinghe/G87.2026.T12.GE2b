@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="test_register_project_tests.TestRegisterDocument-20260423231701" tests="1" file="test_register_project_tests.py" time="0.001" timestamp="2026-04-23T23:17:01" failures="0" errors="0" skipped="0">
+	<testcase classname="test_register_project_tests.TestRegisterDocument" name="test_tc_m2_st_01_input_file_not_found" time="0.001" timestamp="2026-04-23T23:17:01"/>
+</testsuite>

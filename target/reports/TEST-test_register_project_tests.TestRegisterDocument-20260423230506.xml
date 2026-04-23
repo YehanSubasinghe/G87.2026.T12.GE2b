@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="test_register_project_tests.TestRegisterDocument-20260423230506" tests="1" file="test_register_project_tests.py" time="0.003" timestamp="2026-04-23T23:05:06" failures="1" errors="0" skipped="0">
+	<testcase classname="test_register_project_tests.TestRegisterDocument" name="test_tc_m2_st_01_input_file_not_found" time="0.003" timestamp="2026-04-23T23:05:06">
+		<failure type="AssertionError" message="EnterpriseManagementException not raised"><![CDATA[Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.12/3.12.12/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/case.py", line 58, in testPartExecutor
+    yield
+  File "/opt/homebrew/Cellar/python@3.12/3.12.12/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/case.py", line 634, in run
+    self._callTestMethod(testMethod)
+    ^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.12/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/case.py", line 589, in _callTestMethod
+    if method() is not None:
+    ^^^^^^^^^^^^^^^^^
+  File "/Users/yehan/Documents/PSWE/G87.2026.T12.GE2b/src/unittest/python/test_register_project_tests.py", line 39, in test_tc_m2_st_01_input_file_not_found
+    with self.assertRaises(EnterpriseManagementException) as ctx:
+    ^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.12/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/case.py", line 263, in __exit__
+    self._raiseFailure("{} not raised".format(exc_name))
+    ^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.12/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/case.py", line 200, in _raiseFailure
+    raise self.test_case.failureException(msg)
+    ^^^^^^^^^^^^^^^^^
+AssertionError: EnterpriseManagementException not raised
+]]></failure>
+	</testcase>
+</testsuite>
