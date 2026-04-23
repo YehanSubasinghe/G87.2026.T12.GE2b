@@ -1,7 +1,0 @@
-[
-  {"PROJECT_ID": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4", "inflow": "2500.00"},
-  {"PROJECT_ID": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4", "outflow": "1000.00"},
-  {"PROJECT_ID": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4", "inflow": "500.00"},
-  {"PROJECT_ID": "b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5", "inflow": "3000.00"},
-  {"PROJECT_ID": "b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5", "outflow": "750.50"}
-]
