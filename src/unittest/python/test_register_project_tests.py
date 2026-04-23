@@ -40,6 +40,13 @@ class TestRegisterDocument(unittest.TestCase):
             EnterpriseManager.register_document(missing_path)
         self.assertIn("not found", ctx.exception.message.lower())
 
+    def test_tc_m2_st_02_file_is_not_json(self):
+        """P2: file exists but its contents cannot be parsed as JSON."""
+        path = self._write_json_file("test_notjson.json", "this is not json at all")
+        with self.assertRaises(EnterpriseManagementException) as ctx:
+            EnterpriseManager.register_document(path)
+        self.assertIn("json", ctx.exception.message.lower())
+
 
 if __name__ == "__main__":
     unittest.main()
