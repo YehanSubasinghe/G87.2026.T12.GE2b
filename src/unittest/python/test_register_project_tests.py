@@ -152,5 +152,60 @@ class TestRegisterDocument(unittest.TestCase):
             EnterpriseManager.register_document(path)
         self.assertIn("no valid values", ctx.exception.message.lower())
 
+    # ----- TC_M2_23: NAME part 5 chars -----
+    def test_tc_m2_23_filename_short_name(self):
+        path = self._write_json_file(
+            "test_short_name.json",
+            {"PROJECT_ID": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+             "FILENAME": "abcde.pdf"})
+
+        with self.assertRaises(EnterpriseManagementException) as ctx:
+            EnterpriseManager.register_document(path)
+        self.assertIn("no valid values", ctx.exception.message.lower())
+
+    # ----- TC_M2_24: NAME part 10 chars -----
+    def test_tc_m2_24_filename_long_name(self):
+        path = self._write_json_file(
+            "test_long_name.json",
+            {"PROJECT_ID": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+             "FILENAME": "abcd123456.pdf"})
+
+        with self.assertRaises(EnterpriseManagementException) as ctx:
+            EnterpriseManager.register_document(path)
+        self.assertIn("no valid values", ctx.exception.message.lower())
+
+    # ----- TC_M2_25: NAME contains "@" -----
+    def test_tc_m2_25_filename_special_char(self):
+        path = self._write_json_file(
+            "test_special_name.json",
+            {"PROJECT_ID": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+             "FILENAME": "abcd@234.pdf"})
+
+        with self.assertRaises(EnterpriseManagementException) as ctx:
+            EnterpriseManager.register_document(path)
+        self.assertIn("no valid values", ctx.exception.message.lower())
+
+    # ----- TC_M2_26: no extension -----
+    def test_tc_m2_26_filename_no_extension(self):
+        path = self._write_json_file(
+            "test_no_ext.json",
+            {"PROJECT_ID": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+             "FILENAME": "abcd1234"})
+
+        with self.assertRaises(EnterpriseManagementException) as ctx:
+            EnterpriseManager.register_document(path)
+        self.assertIn("no valid values", ctx.exception.message.lower())
+
+    # ----- TC_M2_27: extension .txt -----
+    def test_tc_m2_27_filename_bad_extension(self):
+        path = self._write_json_file(
+            "test_bad_ext.json",
+            {"PROJECT_ID": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+             "FILENAME": "abcd1234.txt"})
+
+        with self.assertRaises(EnterpriseManagementException) as ctx:
+            EnterpriseManager.register_document(path)
+        self.assertIn("no valid values", ctx.exception.message.lower())
+
 if __name__ == "__main__":
     unittest.main()
