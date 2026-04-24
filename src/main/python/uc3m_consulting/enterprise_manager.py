@@ -5,6 +5,7 @@ import re
 from uc3m_consulting.enterprise_management_exception import (
 EnterpriseManagementException,
 )
+from uc3m_consulting.project_document import ProjectDocument
 
 class EnterpriseManager:
     """Provides the methods for managing enterprise projects and their documents."""
@@ -52,4 +53,20 @@ class EnterpriseManager:
             raise EnterpriseManagementException(
                 "JSON data has no valid values")
 
-        return None
+        document = ProjectDocument(project_id, filename)
+        EnterpriseManager._save_document(document)
+        return document.file_signature
+
+    @staticmethod
+    def _save_document(document):
+        """Append the document's to_json() dict to all_documents.json."""
+
+        path = "all_documents.json"
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as file_handle:
+                entries = json.load(file_handle)
+        else:
+            entries = []
+        entries.append(document.to_json())
+        with open(path, "w", encoding="utf-8") as file_handle:
+            json.dump(entries, file_handle, indent=2)
