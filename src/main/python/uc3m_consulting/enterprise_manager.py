@@ -35,4 +35,12 @@ class EnterpriseManager:
                 or len(data) != 2):
             raise EnterpriseManagementException(
                 "JSON does not have the expected structure")
+
+        project_id = data["PROJECT_ID"]
+        filename = data["FILENAME"]
+
+        if not project_id or not filename:
+            raise EnterpriseManagementException(
+                "JSON data has no valid values")
+
         return None
