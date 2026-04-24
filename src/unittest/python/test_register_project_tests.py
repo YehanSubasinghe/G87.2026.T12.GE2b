@@ -284,5 +284,57 @@ class TestRegisterDocument(unittest.TestCase):
         # original message preserved, NOT replaced by the generic wrapper
         self.assertEqual(ctx.exception.message, "inner pre-check failed")
 
+    _VALID_PID = "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4"
+    _VALID_FN = "abcd1234.pdf"
+
+    def _assert_not_json(self, filename, raw_content):
+        path = self._write_json_file(filename, raw_content)
+
+        with self.assertRaises(EnterpriseManagementException) as ctx:
+            EnterpriseManager.register_document(path)
+        self.assertIn("json", ctx.exception.message.lower())
+
+    # TC_M2_11 — opening brace deleted
+    def test_tc_m2_11_missing_open_brace(self):
+        self._assert_not_json(
+            "test_no_open.json",
+            f'"PROJECT_ID":"{self._VALID_PID}","FILENAME":"{self._VALID_FN}"}}')
+
+    # TC_M2_12 — closing brace deleted
+    def test_tc_m2_12_missing_close_brace(self):
+        self._assert_not_json(
+            "test_no_close.json",
+            f'{{"PROJECT_ID":"{self._VALID_PID}","FILENAME":"{self._VALID_FN}"')
+
+    # TC_M2_13 — comma between pairs deleted
+    def test_tc_m2_13_missing_comma(self):
+        self._assert_not_json(
+            "test_no_comma.json",
+            f'{{"PROJECT_ID":"{self._VALID_PID}""FILENAME":"{self._VALID_FN}"}}')
+
+    # TC_M2_14 — colon after PROJECT_ID deleted
+    def test_tc_m2_14_missing_colon_after_pid(self):
+        self._assert_not_json(
+            "test_no_colon1.json",
+            f'{{"PROJECT_ID""{self._VALID_PID}","FILENAME":"{self._VALID_FN}"}}')
+
+    # TC_M2_15 — colon after FILENAME deleted
+    def test_tc_m2_15_missing_colon_after_fn(self):
+        self._assert_not_json(
+            "test_no_colon2.json",
+            f'{{"PROJECT_ID":"{self._VALID_PID}","FILENAME""{self._VALID_FN}"}}')
+
+    # TC_M2_16 — opening brace duplicated
+    def test_tc_m2_16_duplicated_open_brace(self):
+        self._assert_not_json(
+            "test_double_open.json",
+            f'{{{{"PROJECT_ID":"{self._VALID_PID}","FILENAME":"{self._VALID_FN}"}}')
+
+    # TC_M2_17 — comma duplicated
+    def test_tc_m2_17_duplicated_comma(self):
+        self._assert_not_json(
+            "test_extra_comma.json",
+            f'{{"PROJECT_ID":"{self._VALID_PID}",,"FILENAME":"{self._VALID_FN}"}}')
+
 if __name__ == "__main__":
     unittest.main()
