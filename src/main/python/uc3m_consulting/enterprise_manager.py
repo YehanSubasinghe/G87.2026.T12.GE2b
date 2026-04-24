@@ -28,7 +28,11 @@ class EnterpriseManager:
         except json.JSONDecodeError as ex:
             raise EnterpriseManagementException(
                 "File is not JSON formatted") from ex
-        if not isinstance(data, dict) or "PROJECT_ID" not in data:
+        # tighten the structure check:
+        if (not isinstance(data, dict)
+                or "PROJECT_ID" not in data
+                or "FILENAME" not in data
+                or len(data) != 2):
             raise EnterpriseManagementException(
                 "JSON does not have the expected structure")
         return None
