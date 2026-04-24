@@ -266,5 +266,23 @@ class TestRegisterDocument(unittest.TestCase):
         self.assertIn("internal processing error",
                       ctx.exception.message.lower())
 
+    # ----- Path P7 / TC_M2_ST_07 -----
+    def test_tc_m2_st_07_eme_is_propagated_unchanged(self):
+        """P7: inner EME must propagate with its original message, not be wrapped."""
+
+        path = self._write_json_file(
+            "test_valid.json",
+            {"PROJECT_ID": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+             "FILENAME": "abcd1234.pdf"})
+        original = EnterpriseManagementException("inner pre-check failed")
+        # Patch ProjectDocument inside the EM namespace (imported there)
+        import uc3m_consulting.enterprise_manager as em_mod
+        with patch.object(em_mod, "ProjectDocument",
+                          side_effect=original):
+            with self.assertRaises(EnterpriseManagementException) as ctx:
+                EnterpriseManager.register_document(path)
+        # original message preserved, NOT replaced by the generic wrapper
+        self.assertEqual(ctx.exception.message, "inner pre-check failed")
+
 if __name__ == "__main__":
     unittest.main()
