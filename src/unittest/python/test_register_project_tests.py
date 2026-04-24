@@ -56,5 +56,45 @@ class TestRegisterDocument(unittest.TestCase):
             EnterpriseManager.register_document(path)
         self.assertIn("structure", ctx.exception.message.lower())
 
+    # ----- TC_M2_06: empty JSON object (PAIR_LIST deleted) -----
+    def test_tc_m2_06_empty_object(self):
+        path = self._write_json_file("test_empty.json", {})
+
+        with self.assertRaises(EnterpriseManagementException) as ctx:
+            EnterpriseManager.register_document(path)
+        self.assertIn("structure", ctx.exception.message.lower())
+
+    # ----- TC_M2_08: PAIR_FN deleted (no FILENAME key) -----
+    def test_tc_m2_08_missing_filename_key(self):
+        path = self._write_json_file(
+            "test_no_fn.json",
+            {"PROJECT_ID": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4"})
+
+        with self.assertRaises(EnterpriseManagementException) as ctx:
+            EnterpriseManager.register_document(path)
+        self.assertIn("structure", ctx.exception.message.lower())
+
+    # ----- TC_M2_18: PROJECT_ID key renamed to "PROJECT" -----
+    def test_tc_m2_18_bad_pid_key_name(self):
+        path = self._write_json_file(
+            "test_bad_key1.json",
+            {"PROJECT": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+             "FILENAME": "abcd1234.pdf"})
+
+        with self.assertRaises(EnterpriseManagementException) as ctx:
+            EnterpriseManager.register_document(path)
+        self.assertIn("structure", ctx.exception.message.lower())
+
+    # ----- TC_M2_19: FILENAME key renamed to "FILE" -----
+    def test_tc_m2_19_bad_fn_key_name(self):
+        path = self._write_json_file(
+            "test_bad_key2.json",
+            {"PROJECT_ID": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+             "FILE": "abcd1234.pdf"})
+
+        with self.assertRaises(EnterpriseManagementException) as ctx:
+            EnterpriseManager.register_document(path)
+        self.assertIn("structure", ctx.exception.message.lower())
+
 if __name__ == "__main__":
     unittest.main()
