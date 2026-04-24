@@ -251,5 +251,20 @@ class TestRegisterDocument(unittest.TestCase):
         signature = EnterpriseManager.register_document(path)
         self.assertRegex(signature, r"^[0-9a-f]{64}$")
 
+    # ----- Path P8 / TC_M2_ST_08 -----
+    def test_tc_m2_st_08_generic_exception_is_wrapped(self):
+        """P8: non-EME exception from inside the try block -> wrapped as EME."""
+
+        path = self._write_json_file(
+            "test_valid.json",
+            {"PROJECT_ID": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+             "FILENAME": "abcd1234.pdf"})
+        with patch.object(EnterpriseManager, "_save_document",
+                          side_effect=IOError("disk full")):
+            with self.assertRaises(EnterpriseManagementException) as ctx:
+                EnterpriseManager.register_document(path)
+        self.assertIn("internal processing error",
+                      ctx.exception.message.lower())
+
 if __name__ == "__main__":
     unittest.main()
