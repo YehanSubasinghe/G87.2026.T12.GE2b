@@ -122,7 +122,7 @@ class TestRegisterDocument(unittest.TestCase):
     def test_tc_m2_st_05_pid_non_hex_char(self):
         """P5: PROJECT_ID contains a non-hex character."""
 
-         path = self._write_json_file(
+        path = self._write_json_file(
             "test_nonhex_pid.json",
             {"PROJECT_ID": "z1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
              "FILENAME": "abcd1234.pdf"})
