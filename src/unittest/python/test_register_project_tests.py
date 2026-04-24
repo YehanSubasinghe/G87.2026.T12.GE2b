@@ -118,5 +118,39 @@ class TestRegisterDocument(unittest.TestCase):
             EnterpriseManager.register_document(path)
         self.assertIn("no valid values", ctx.exception.message.lower())
 
+    # ----- Path P5 / TC_M2_ST_05 / TC_M2_22 -----
+    def test_tc_m2_st_05_pid_non_hex_char(self):
+        """P5: PROJECT_ID contains a non-hex character."""
+
+         path = self._write_json_file(
+            "test_nonhex_pid.json",
+            {"PROJECT_ID": "z1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+             "FILENAME": "abcd1234.pdf"})
+        with self.assertRaises(EnterpriseManagementException) as ctx:
+            EnterpriseManager.register_document(path)
+        self.assertIn("no valid values", ctx.exception.message.lower())
+
+    # ----- TC_M2_20: 31 hex chars -----
+    def test_tc_m2_20_pid_short(self):
+        path = self._write_json_file(
+            "test_short_pid.json",
+            {"PROJECT_ID": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d",
+             "FILENAME": "abcd1234.pdf"})
+
+        with self.assertRaises(EnterpriseManagementException) as ctx:
+            EnterpriseManager.register_document(path)
+        self.assertIn("no valid values", ctx.exception.message.lower())
+
+    # ----- TC_M2_21: 33 hex chars -----
+    def test_tc_m2_21_pid_long(self):
+        path = self._write_json_file(
+            "test_long_pid.json",
+            {"PROJECT_ID": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4f",
+             "FILENAME": "abcd1234.pdf"})
+
+        with self.assertRaises(EnterpriseManagementException) as ctx:
+            EnterpriseManager.register_document(path)
+        self.assertIn("no valid values", ctx.exception.message.lower())
+
 if __name__ == "__main__":
     unittest.main()
