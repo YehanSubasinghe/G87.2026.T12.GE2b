@@ -1,4 +1,5 @@
 """Module: enterprise_manager. Contains the EnterpriseManager class."""
+import json
 import os
 from uc3m_consulting.enterprise_management_exception import (
 EnterpriseManagementException,
@@ -18,6 +19,13 @@ class EnterpriseManager:
     @staticmethod
     def register_document(input_file: str):
         """..."""
+
         if not os.path.exists(input_file):
             raise EnterpriseManagementException("Input file not found")
+        try:
+            with open(input_file, "r", encoding="utf-8") as file_handle:
+                _data = json.load(file_handle)
+        except json.JSONDecodeError as ex:
+            raise EnterpriseManagementException(
+                "File is not JSON formatted") from ex
         return None
