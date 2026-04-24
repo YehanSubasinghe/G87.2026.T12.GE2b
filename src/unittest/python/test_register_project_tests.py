@@ -47,6 +47,14 @@ class TestRegisterDocument(unittest.TestCase):
             EnterpriseManager.register_document(path)
         self.assertIn("json", ctx.exception.message.lower())
 
+    # ----- Path P3 / TC_M2_ST_03 / TC_M2_07 -----
+    def test_tc_m2_st_03_missing_project_id_key(self):
+        """P3: JSON parses but PROJECT_ID key is missing."""
+        path = self._write_json_file(
+            "test_no_pid.json", {"FILENAME": "abcd1234.pdf"})
+        with self.assertRaises(EnterpriseManagementException) as ctx:
+            EnterpriseManager.register_document(path)
+        self.assertIn("structure", ctx.exception.message.lower())
 
 if __name__ == "__main__":
     unittest.main()
