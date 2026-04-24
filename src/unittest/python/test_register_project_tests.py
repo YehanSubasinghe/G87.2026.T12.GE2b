@@ -96,5 +96,27 @@ class TestRegisterDocument(unittest.TestCase):
             EnterpriseManager.register_document(path)
         self.assertIn("structure", ctx.exception.message.lower())
 
+    # ----- Path P4 / TC_M2_ST_04 / TC_M2_09 -----
+    def test_tc_m2_st_04_empty_project_id(self):
+        """P4: structure valid but PROJECT_ID value is empty string."""
+
+        path = self._write_json_file(
+            "test_empty_pid.json",
+            {"PROJECT_ID": "", "FILENAME": "abcd1234.pdf"})
+        with self.assertRaises(EnterpriseManagementException) as ctx:
+            EnterpriseManager.register_document(path)
+        self.assertIn("no valid values", ctx.exception.message.lower())
+
+    # ----- TC_M2_10 -----
+    def test_tc_m2_10_empty_filename(self):
+        path = self._write_json_file(
+            "test_empty_fn.json",
+            {"PROJECT_ID": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+             "FILENAME": ""})
+
+        with self.assertRaises(EnterpriseManagementException) as ctx:
+            EnterpriseManager.register_document(path)
+        self.assertIn("no valid values", ctx.exception.message.lower())
+
 if __name__ == "__main__":
     unittest.main()
