@@ -24,8 +24,11 @@ class EnterpriseManager:
             raise EnterpriseManagementException("Input file not found")
         try:
             with open(input_file, "r", encoding="utf-8") as file_handle:
-                _data = json.load(file_handle)
+                data = json.load(file_handle)
         except json.JSONDecodeError as ex:
             raise EnterpriseManagementException(
                 "File is not JSON formatted") from ex
+        if not isinstance(data, dict) or "PROJECT_ID" not in data:
+            raise EnterpriseManagementException(
+                "JSON does not have the expected structure")
         return None
