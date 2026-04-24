@@ -7,6 +7,9 @@ EnterpriseManagementException,
 )
 from uc3m_consulting.project_document import ProjectDocument
 
+_PID_PATTERN = re.compile(r"[0-9a-f]{32}")
+_FILENAME_PATTERN = re.compile(r"[a-zA-Z0-9]{8}\.(pdf|docx|xlsx)")
+
 class EnterpriseManager:
     """Provides the methods for managing enterprise projects and their documents."""
 
@@ -45,11 +48,11 @@ class EnterpriseManager:
             raise EnterpriseManagementException(
                 "JSON data has no valid values")
 
-        if not re.fullmatch(r"[0-9a-f]{32}", project_id):
+        if not _PID_PATTERN.fullmatch(project_id):
             raise EnterpriseManagementException(
                 "JSON data has no valid values")
 
-        if not re.fullmatch(r"[a-zA-Z0-9]{8}\.(pdf|docx|xlsx)", filename):
+        if not _FILENAME_PATTERN.fullmatch(filename):
             raise EnterpriseManagementException(
                 "JSON data has no valid values")
 
