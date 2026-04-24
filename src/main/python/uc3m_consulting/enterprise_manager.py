@@ -48,4 +48,8 @@ class EnterpriseManager:
             raise EnterpriseManagementException(
                 "JSON data has no valid values")
 
+        if not re.fullmatch(r"[a-zA-Z0-9]{8}\.(pdf|docx|xlsx)", filename):
+            raise EnterpriseManagementException(
+                "JSON data has no valid values")
+
         return None
