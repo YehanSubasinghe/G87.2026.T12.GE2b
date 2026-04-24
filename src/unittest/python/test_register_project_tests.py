@@ -1,6 +1,7 @@
 """Tests for EnterpriseManager.register_document (CM-FR-01-O2)."""
 import json
 import os
+import re
 import shutil
 import tempfile
 import unittest
@@ -206,6 +207,49 @@ class TestRegisterDocument(unittest.TestCase):
         with self.assertRaises(EnterpriseManagementException) as ctx:
             EnterpriseManager.register_document(path)
         self.assertIn("no valid values", ctx.exception.message.lower())
+
+    # ----- Path P6 / TC_M2_ST_06 / TC_M2_01 -----
+    def test_tc_m2_st_06_happy_path_pdf(self):
+        """P6: valid input, .pdf extension — returns 64-char SHA-256."""
+
+        path = self._write_json_file(
+            "test_valid.json",
+            {"PROJECT_ID": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+             "FILENAME": "abcd1234.pdf"})
+        signature = EnterpriseManager.register_document(path)
+        self.assertIsInstance(signature, str)
+        self.assertRegex(signature, r"^[0-9a-f]{64}$")
+        # and all_documents.json should now exist with one entry
+        with open(os.path.join(self.tmp_dir, "all_documents.json"),
+                  "r", encoding="utf-8") as f:
+            entries = json.load(f)
+        self.assertEqual(len(entries), 1)
+        self.assertEqual(entries[0]["project_id"],
+                         "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4")
+        self.assertEqual(entries[0]["file_name"], "abcd1234.pdf")
+        self.assertEqual(entries[0]["alg"], "SHA-256")
+        self.assertEqual(entries[0]["typ"], "DOCUMENT")
+        self.assertEqual(entries[0]["file_signature"], signature)
+
+    # ----- TC_M2_02 -----
+    def test_tc_m2_02_happy_path_docx(self):
+        path = self._write_json_file(
+            "test_valid_docx.json",
+            {"PROJECT_ID": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+             "FILENAME": "abcd1234.docx"})
+
+        signature = EnterpriseManager.register_document(path)
+        self.assertRegex(signature, r"^[0-9a-f]{64}$")
+
+    # ----- TC_M2_03 -----
+    def test_tc_m2_03_happy_path_xlsx(self):
+        path = self._write_json_file(
+            "test_valid_xlsx.json",
+            {"PROJECT_ID": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+             "FILENAME": "abcd1234.xlsx"})
+
+        signature = EnterpriseManager.register_document(path)
+        self.assertRegex(signature, r"^[0-9a-f]{64}$")
 
 if __name__ == "__main__":
     unittest.main()
