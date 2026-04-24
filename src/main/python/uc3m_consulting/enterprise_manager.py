@@ -53,8 +53,12 @@ class EnterpriseManager:
             raise EnterpriseManagementException(
                 "JSON data has no valid values")
 
-        document = ProjectDocument(project_id, filename)
-        EnterpriseManager._save_document(document)
+        try:
+            document = ProjectDocument(project_id, filename)
+            EnterpriseManager._save_document(document)
+        except Exception as ex:
+            raise EnterpriseManagementException(
+                "Internal processing error when getting the file_signature") from ex
         return document.file_signature
 
     @staticmethod
