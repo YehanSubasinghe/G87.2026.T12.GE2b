@@ -1,6 +1,7 @@
 """Module: enterprise_manager. Contains the EnterpriseManager class."""
 import json
 import os
+import re
 from uc3m_consulting.enterprise_management_exception import (
 EnterpriseManagementException,
 )
@@ -40,6 +41,10 @@ class EnterpriseManager:
         filename = data["FILENAME"]
 
         if not project_id or not filename:
+            raise EnterpriseManagementException(
+                "JSON data has no valid values")
+
+        if not re.fullmatch(r"[0-9a-f]{32}", project_id):
             raise EnterpriseManagementException(
                 "JSON data has no valid values")
 
