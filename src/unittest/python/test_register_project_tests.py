@@ -336,5 +336,48 @@ class TestRegisterDocument(unittest.TestCase):
             "test_extra_comma.json",
             f'{{"PROJECT_ID":"{self._VALID_PID}",,"FILENAME":"{self._VALID_FN}"}}')
 
+    def _valid_payload(self, name, filename="abcd1234.pdf"):
+        """Helper: write a valid JSON file in the temp dir and return its path."""
+
+        return self._write_json_file(
+            name,
+            {"PROJECT_ID": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+             "FILENAME": filename})
+
+    # ----- L1: all_documents.json does not exist -----
+    def test_l1_zero_iterations_creates_file(self):
+        path = self._valid_payload("p1.json")
+
+        self.assertFalse(os.path.exists("all_documents.json"))
+        EnterpriseManager.register_document(path)
+        with open("all_documents.json", "r", encoding="utf-8") as f:
+            entries = json.load(f)
+        self.assertEqual(len(entries), 1)
+
+    # ----- L2: file already contains one entry -----
+    def test_l2_one_existing_entry_appends_second(self):
+        EnterpriseManager.register_document(self._valid_payload("p1.json"))
+
+        EnterpriseManager.register_document(
+            self._valid_payload("p2.json", "zzzz9999.docx"))
+        with open("all_documents.json", "r", encoding="utf-8") as f:
+            entries = json.load(f)
+        self.assertEqual(len(entries), 2)
+        self.assertEqual(entries[1]["file_name"], "zzzz9999.docx")
+
+    # ----- L3: file already contains n > 1 entries -----
+    def test_l3_multiple_existing_entries_appends_one_more(self):
+        for i in range(5):
+            EnterpriseManager.register_document(
+                self._valid_payload(f"p{i}.json",
+                                    f"file{i:04d}.pdf"))
+
+        EnterpriseManager.register_document(
+            self._valid_payload("plast.json", "lastfile.xlsx"))
+        with open("all_documents.json", "r", encoding="utf-8") as f:
+            entries = json.load(f)
+        self.assertEqual(len(entries), 6)
+        self.assertEqual(entries[-1]["file_name"], "lastfile.xlsx")
+
 if __name__ == "__main__":
     unittest.main()
