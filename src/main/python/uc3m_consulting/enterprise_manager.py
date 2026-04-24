@@ -17,7 +17,7 @@ class EnterpriseManager:
         pass
 
     @staticmethod
-    def validate_cif(cif: str):
+    def validate_cif(_cif: str):
         """Returns True if the CIF received is a valid Spanish CIF, False otherwise."""
         return True
 
