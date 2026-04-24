@@ -71,11 +71,13 @@ class EnterpriseManager:
         """Append the document's to_json() dict to all_documents.json."""
 
         path = "all_documents.json"
+        entries = []
         if os.path.exists(path):
             with open(path, "r", encoding="utf-8") as file_handle:
                 entries = json.load(file_handle)
-        else:
-            entries = []
+        if not isinstance(entries, list):
+            raise EnterpriseManagementException(
+                "all_documents.json is corrupt (not a JSON list)")
         entries.append(document.to_json())
         with open(path, "w", encoding="utf-8") as file_handle:
             json.dump(entries, file_handle, indent=2)
